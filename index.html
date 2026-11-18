@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>SmartAttend AI</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="style.css">
+</head><body>
+<canvas id="bg"></canvas>
+<div class="wrap">
+ <nav>
+  <div class="logo">Smart<span>Attend</span> AI</div>
+  <button onclick="show('home')">Student</button>
+  <button onclick="show('admin')">Admin</button>
+ </nav>
+
+ <div id="home">
+  <div style="margin:20px 0 26px">
+   <div class="chip">LIVE &middot; <span id="clock"></span></div>
+   <h1 id="greet">Hello!</h1>
+   <p class="sub">Show your face to the camera and your attendance is marked in a blink.</p>
+  </div>
+  <div class="grid2">
+   <div class="card tilt">
+    <h3>Face Attendance</h3>
+    <div id="scanbox" class="scanbox">
+     <video id="cam" autoplay playsinline muted></video>
+     <div class="cn tl"></div><div class="cn tr"></div><div class="cn bl"></div><div class="cn br"></div>
+     <div class="beam"></div><div id="ph">Camera is off</div>
+    </div>
+    <div class="msg" id="scanmsg">Press start and look at the camera.</div>
+    <button class="btn" id="camBtn" onclick="toggleCam()">Start Camera</button>
+   </div>
+   <div class="card tilt">
+    <h3>My Attendance &amp; Prediction</h3>
+    <div class="row"><input id="rollIn" placeholder="Enter your roll number" onkeydown="if(event.key==='Enter')myStats()">
+     <button class="btn" onclick="myStats()">Check</button></div>
+    <div id="me" style="color:var(--m)">Type your roll number to see your attendance percentage and performance outlook.</div>
+   </div>
+  </div>
+ </div>
+
+ <div id="admin" class="hide">
+  <div id="loginBox" class="card" style="max-width:430px;margin:40px auto">
+   <h3 id="loginTitle">Admin Login</h3>
+   <p class="sub" id="loginSub" style="margin-top:0">Only the admin can open this panel.</p>
+   <div class="row"><input id="pw" type="password" placeholder="Password"></div>
+   <div class="row hide" id="pw2row"><input id="pw2" type="password" placeholder="Confirm password"></div>
+   <div class="msg" id="loginMsg" style="color:var(--bad)"></div>
+   <button class="btn" id="loginBtn" onclick="doLogin()">Log in</button>
+  </div>
+  <div id="panel" class="hide">
+   <div style="display:flex;align-items:center;margin-bottom:12px"><h1 style="font-size:30px;flex:1">Admin Panel</h1>
+    <button onclick="doLogout()">Log out</button></div>
+   <div class="tabs" id="tabs"></div>
+   <div id="pane"></div>
+  </div>
+ </div>
+</div>
+
+<div id="welcome"><div class="pop"><div class="tick">&#10004;</div><h1 id="wname" style="font-size:44px">Welcome</h1>
+ <p class="sub" id="wsub"></p></div></div>
+
+<div id="modal"><div class="card">
+ <h3 id="mtitle">Enroll face</h3>
+ <div class="scanbox live" style="margin-bottom:12px"><video id="mcam" autoplay playsinline muted></video>
+  <div class="cn tl"></div><div class="cn tr"></div><div class="cn bl"></div><div class="cn br"></div><div class="beam"></div></div>
+ <div class="msg" id="mmsg"></div>
+ <div class="row"><button class="btn" id="capBtn" onclick="capture()">Capture face</button>
+  <button onclick="closeModal()">Close</button></div>
+</div></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@vladmandic/face-api@1.7.12/dist/face-api.js"></script>
+<script src="script.js"></script>
+</body></html>
